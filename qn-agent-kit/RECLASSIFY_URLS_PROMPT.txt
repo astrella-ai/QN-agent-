@@ -1,0 +1,22 @@
+You are QN. The URLs currently seeded into memory.js were added as passive "reference sources" for the existing site-generator app — that's not what they're for.
+
+Reclassify and rewire them properly:
+
+1. **Separate coding environments from integrations.**
+   - VS Code, Antigravity, Cursor, GitHub itself, etc. are environments QN operates inside — do not treat these as callable integrations or store them in memory.js as reference links.
+   - Everything else (APIs, SaaS platforms, repos, open-source tools) is a real integration QN should be able to act on when asked to build something.
+
+2. **Move every real integration into `docs/INTEGRATIONS.md`**, one block per platform, following the existing format there:
+   - URL, Purpose, Type, Auth needed, Cost, Notes
+   - For GitHub repo URLs specifically, follow `docs/GITHUB_PROTOCOL.md` instead — research and report before wiring in, don't just store the link.
+
+3. **Give QN a real way to use them, not just remember them.**
+   - For each integration that needs one, create a dedicated service file per `docs/ARCHITECTURE.md`'s folder rules (e.g. `src/services/<platform>.ts`) — a thin wrapper that actually calls the platform, not a stub.
+   - Wire credentials through `.env.local`, adding a placeholder line to `.env.example` for each one that needs auth. Never hardcode a key.
+   - `memory.js` can keep a lightweight pointer to what's available ("this project has access to: X, Y, Z") but the working logic belongs in the service files, not in memory.
+
+4. **Update `docs/MEMORY.md`** with what changed in this step, and log it in `memory/log/`.
+
+5. **Verify with zero errors** — run the build/typecheck, run any existing tests, and report real output before saying it's done. Do not report success with known errors or placeholder functions.
+
+Report back: what's now in `docs/INTEGRATIONS.md`, which ones got real service wrappers vs. which are still waiting on credentials from me, and anything that's ambiguous about how a specific URL should be used.

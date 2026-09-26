@@ -1,0 +1,57 @@
+You are QN. The scaffold is built (from BUILD_QN_PROMPT.txt) and docs/INTEGRATIONS.md is now populated
+with real platforms. This step is: fix every error, wire each integration in correctly by category,
+and get the whole thing actually working — not just compiling.
+
+Do this in order. Do not skip steps or mark anything done that isn't actually verified.
+
+## 1. Fix everything currently broken
+- Run the full build, typecheck, and lint for this project.
+- Fix every error and warning you find. Do not silence or suppress errors — fix the actual cause.
+- If memory.js (or any file) still hardcodes URLs instead of reading from docs/INTEGRATIONS.md,
+  fix that now per AGENT_INSTRUCTIONS.md's single-source-of-truth rule.
+- Re-run build/typecheck/lint after each fix until all three pass clean.
+
+## 2. Categorize every integration in docs/INTEGRATIONS.md
+Sort each entry into exactly one category, and note the category next to each entry:
+- **Programmatic** — has a real API, QN can call it directly (e.g. Shodan, GitHub, Google AI Studio)
+- **Self-hosted** — open-source, runs on our own infrastructure, no external calls (e.g. Coqui TTS)
+- **Reference-only** — a directory, dashboard, course site, or design tool with no API to call —
+  useful for research/branding but not something QN wires into app logic (e.g. start.me OSINT4ALL,
+  Mindluster, LogoAI)
+- **Needs a decision** — anything ambiguous (e.g. AllGPT overlapping with individually-wired model
+  APIs) — flag it and ask rather than guessing
+
+## 3. For every "Programmatic" integration
+- Add its key/token placeholder to `.env.example` (never a real value)
+- Create a dedicated service file for it under the services/ folder from docs/ARCHITECTURE.md
+- Confirm it's never called directly from a UI component — only through its service file
+- Write one small test proving the service file at least initializes/authenticates correctly
+  (does not need to hit rate-limited endpoints repeatedly — one basic smoke test is enough)
+
+## 4. For every "Self-hosted" integration
+- Add setup instructions (install steps, run command) to README.md
+- Confirm it runs locally without errors before marking it done
+
+## 5. For every "Reference-only" integration
+- Just confirm it's logged correctly in docs/INTEGRATIONS.md — no code changes needed for these
+
+## 6. Anything flagged "Needs a decision"
+- List these clearly at the end of your report instead of guessing or silently picking one
+
+## 7. Final verification — do not report done until this is true
+- Full build passes with zero errors
+- Typecheck passes with zero errors
+- Lint passes with zero errors
+- Every test (including the new smoke tests from step 3) passes
+- The app actually runs (`npm run dev` or equivalent) without runtime errors in the console
+
+## 8. Report back
+- What was broken and what you fixed
+- The categorized list from step 2
+- Which integrations are now live vs. reference-only vs. pending a decision
+- Real command output proving build/typecheck/lint/tests all pass — not a summary, the actual output
+- Update docs/MEMORY.md and log an entry in memory/log/ with today's date before finishing
+
+Ground rule: no placeholder functions, no fake "success" messages, no marking something done that
+you haven't actually run and verified. If something can't be finished (missing credentials, unclear
+scope), say so explicitly instead of faking completion.

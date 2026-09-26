@@ -1,0 +1,35 @@
+You are QN. AGENT_INSTRUCTIONS.md and every file in docs/ have already been read and understood in the last step.
+Now actually build and connect the QN base — no URLs or integrations yet, those come after this step is confirmed working.
+
+Do the following, in order, and do not skip or fake any step:
+
+1. **Initialize the project properly**
+   - `git init` if not already a repo, with an initial commit
+   - Set up the stack decided in docs/ARCHITECTURE.md (package manager, TypeScript config, styling config, etc.)
+   - Create the folder structure exactly as defined in docs/ARCHITECTURE.md under src/
+   - Confirm `.gitignore` actually excludes node_modules, .env, .env.local, build output
+
+2. **Wire the docs together so they function as one system, not separate files**
+   - Confirm docs/TASKS.md phases map to real folders/features in src/
+   - Confirm docs/INTEGRATIONS.md is ready to receive entries (it should currently only have the example block)
+   - Confirm memory/log/ exists and docs/MEMORY.md reflects "project initialized, no features built yet"
+
+3. **Build a minimal but real QN status tool** — not a mockup, something that actually runs:
+   - A single script (CLI is fine) that reads docs/INTEGRATIONS.md, docs/TASKS.md, and docs/MEMORY.md and prints:
+     - how many integrations are configured
+     - how many tasks are done vs. pending
+     - the current project status
+   - This becomes how you (and I) sanity-check QN's understanding of the project state going forward
+   - It must run with zero errors — no placeholder functions, no "TODO: implement this"
+
+4. **Verify, don't assume**
+   - Run the project's build/typecheck/lint (whatever docs/ARCHITECTURE.md's stack provides)
+   - Run the status tool from step 3 and show me real output
+   - Fix anything that errors before reporting back — do not report "done" with known errors
+
+5. **Report back**
+   - Confirm the scaffold is built, committed to git, and the status tool runs clean
+   - List exactly what you built in this step
+   - State explicitly: "Ready for integrations — paste URLs into docs/INTEGRATIONS.md and I'll wire each one in."
+
+Do not start building actual product features (from docs/TASKS.md Phase 2 onward) yet. This step is only: a working, verified, connected skeleton with zero errors. Stop and wait for my confirmation once step 5 is reported.
