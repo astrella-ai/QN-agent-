@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="csrf-token" content="{{ csrf }}">
+<meta name="theme-color" content="#1B2430">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<title>{{ brand }}</title>
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="icon" href="/static/icons/icon-192.png">
+<link rel="apple-touch-icon" href="/static/icons/icon-192.png">
+<link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="#/">{{ brand }}</a>
+  <div class="pills" id="pills" aria-label="System status"></div>
+  <button class="orb-btn" id="orb-open" type="button" aria-label="Talk to the assistant"><span class="orb" id="orb-mini"></span></button>
+</header>
+<nav class="nav" id="nav" aria-label="Main">
+  <a href="#/" data-route="live">Live</a>
+  <a href="#/new" data-route="new">New post</a>
+  <a href="#/settings" data-route="settings">Settings</a>
+</nav>
+<main id="view" tabindex="-1"></main>
+
+<aside id="assistant" class="sheet" hidden aria-label="Assistant">
+  <div class="sheet-head">
+    <span class="orb big" id="orb"></span>
+    <div class="sheet-title"><strong>Assistant</strong><span id="orb-status" aria-live="polite">Ready</span></div>
+    <button class="btn ghost" id="assistant-close" type="button" aria-label="Close assistant">Close</button>
+  </div>
+  <div class="msgs" id="msgs" aria-live="polite"></div>
+  <div id="confirm-card" class="confirm-card" hidden></div>
+  <div class="sheet-foot">
+    <button class="btn mic" id="mic" type="button" aria-label="Start or stop listening">Mic</button>
+    <input id="say" type="text" placeholder="Type or press the mic" autocomplete="off" maxlength="1000" aria-label="Message">
+    <button class="btn primary" id="send" type="button">Send</button>
+  </div>
+  <p class="hint" id="voice-hint"></p>
+</aside>
+
+<dialog id="dlg" aria-labelledby="dlg-title">
+  <form method="dialog">
+    <h2 id="dlg-title"></h2>
+    <p id="dlg-body"></p>
+    <div class="row end"><button class="btn" value="cancel">Cancel</button><button class="btn primary" value="ok" id="dlg-ok"></button></div>
+  </form>
+</dialog>
+<div id="toasts" role="status" aria-live="polite"></div>
+<script src="/static/app.js" defer></script>
+</body>
+</html>

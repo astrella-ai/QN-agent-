@@ -1,0 +1,35 @@
+[
+  {
+    "id": "aad8a0ba-bae6-4b0b-b567-67157cb84a53",
+    "at": "2026-09-24T12:21:31.107Z",
+    "action": "Delete a temporary artifact",
+    "reason": "Remove a temporary demo artifact only after explicit founder confirmation.",
+    "tier": "Tier 3 explicit-confirm-always",
+    "details": {
+      "target": "C:\\Users\\HP\\Desktop\\qn-agent\\qn-agent-kit\\memory\\log\\tier-3-demo.txt",
+      "confirmed": true
+    }
+  },
+  {
+    "id": "be086d22-2d2c-4219-a846-571a6a70e2de",
+    "at": "2026-09-24T12:21:31.103Z",
+    "action": "Create a small local note",
+    "reason": "Save a working note required to continue the founder brief.",
+    "tier": "Tier 2 light-confirm",
+    "details": {
+      "target": "C:\\Users\\HP\\Desktop\\qn-agent\\qn-agent-kit\\memory\\log\\tier-2-demo.txt",
+      "confirmed": true
+    }
+  },
+  {
+    "id": "f6a4bc81-2ac2-4409-be3f-2bc30164fa44",
+    "at": "2026-09-24T12:21:31.099Z",
+    "action": "Open the founder dashboard",
+    "reason": "Start the normal QN workflow with a Tier 1 automatic action.",
+    "tier": "Tier 1 auto",
+    "details": {
+      "source": "local proof script",
+      "confirmed": true
+    }
+  }
+]
